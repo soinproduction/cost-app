@@ -1,10 +1,11 @@
 import "./CostsFilter.css";
 
-const CostsFilter = ({onChangeYear, year}) => {
+const CostsFilter = ({onChangeYear, year, costs}) => {
     const yearChangeHandler = (event) => {
         onChangeYear(event.target.value);
-
     };
+
+
 
     return (
         <div className="costs-filter">
@@ -12,11 +13,14 @@ const CostsFilter = ({onChangeYear, year}) => {
                 <label>Выбор По Году</label>
                 <select value={year} onChange={yearChangeHandler}>
                     <option value="all">All</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
+                    {
+                        costs.map((cost) => {
+                            const year = new Date(cost.date).getFullYear();
+                            return <option key={cost.id} value={year}>{year}</option>;
+                        })
+                    }
                 </select>
+
             </div>
         </div>
     );

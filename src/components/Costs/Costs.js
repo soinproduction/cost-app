@@ -5,28 +5,23 @@ import CostsFilter from "./CostsFilter";
 import {useState} from "react";
 
 const Costs = ({costs}) => {
-
-    const [selectedYear, setSelectedYear] = useState('2021');
+    let filterCosts;
+    const [selectedYear, setSelectedYear] = useState('all');
     const getChangeYear = (year) => {
         setSelectedYear(year)
     }
-
-
-    let filterCosts;
 
     if (selectedYear === 'all') {
         filterCosts = costs;
     } else {
         filterCosts = costs.filter((cost) => {
-            return cost.date.split('-')[0] === selectedYear;
+            return new Date(cost.date).getFullYear() === +selectedYear;
         });
     }
 
-
-
     return(
         <Card className='costs'>
-            <CostsFilter onChangeYear={getChangeYear} year={selectedYear}/>
+            <CostsFilter onChangeYear={getChangeYear} costs={costs} year={selectedYear}/>
 
             {filterCosts.map((cost) => <CostItem
                 key={cost.id}
