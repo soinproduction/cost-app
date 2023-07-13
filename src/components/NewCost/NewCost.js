@@ -6,7 +6,7 @@ const NewCost = ({onAddCost}) => {
 
         const costData = {
             ...inputConstData,
-            id: (Math.floor(Math.random() * 90) + 10)
+            id: (Math.floor(Math.random() * 90) + 10).toString()
         }
         onAddCost(costData);
     }

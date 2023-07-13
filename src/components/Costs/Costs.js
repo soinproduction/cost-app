@@ -6,29 +6,34 @@ import {useState} from "react";
 
 const Costs = ({costs}) => {
 
-    const [selectedYear, setSelectedYaar] = useState('2021');
+    const [selectedYear, setSelectedYear] = useState('2021');
     const getChangeYear = (year) => {
-        setSelectedYaar(year)
-
-        console.log(selectedYear)
+        setSelectedYear(year)
     }
 
 
-    console.log(costs)
+    let filterCosts;
+
+    if (selectedYear === 'all') {
+        filterCosts = costs;
+    } else {
+        filterCosts = costs.filter((cost) => {
+            return cost.date.split('-')[0] === selectedYear;
+        });
+    }
+
 
 
     return(
-      <div className="">
-          <CostsFilter onChangeYear={getChangeYear} year={selectedYear}/>
-          <Card className='costs'>
-              {costs.map((cost,index) => <CostItem
-                  key={index}
-                  date={new Date(cost.date)}
-                  name={cost.name}
-                  amount={cost.amount}/>)}
-          </Card>
-      </div>
+        <Card className='costs'>
+            <CostsFilter onChangeYear={getChangeYear} year={selectedYear}/>
 
+            {filterCosts.map((cost) => <CostItem
+                key={cost.id}
+                date={new Date(cost.date)}
+                name={cost.name}
+                amount={cost.amount}/>)}
+        </Card>
     );
 }
 

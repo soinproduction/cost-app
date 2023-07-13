@@ -38,14 +38,24 @@ const CostForm = ({onSaveConstData}) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
+        if (userInput.name === '' || userInput.amount === '' || userInput.date === '') {
+            return; // Выход из функции, если есть пустые значения
+        }
+
          setUserInput({
             name: '',
             amount:'',
             date:''
         });
 
+
         onSaveConstData(userInput)
     }
+
+
+
+
+
 
 
     return (
