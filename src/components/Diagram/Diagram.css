@@ -1,0 +1,11 @@
+.diagram {
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #ebc137;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3rem;
+  justify-content: space-around;
+  height: 10rem;
+}
